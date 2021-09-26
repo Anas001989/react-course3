@@ -6,21 +6,19 @@ import Layout from "./components/layout/Layout";
 
 function App() {
   return (
-    <div>
-      <Layout>
-        <Switch>
-          <Route path="/" exact>
-            <AllMeetups />
-          </Route>
-          <Route path="/favorites">
-            <Favorites />
-          </Route>
-          <Route path="/NewMeetup">
-            <NewMeeup />
-          </Route>
-        </Switch>
-      </Layout>
-    </div>
+    <Layout>
+      <Switch>
+        <Route path="/" exact>
+          <AllMeetups />
+        </Route>
+        <Route path="/favorites">
+          <Favorites />
+        </Route>
+        <Route path="/NewMeetup">
+          <NewMeeup />
+        </Route>
+      </Switch>
+    </Layout>
   );
 }
 
