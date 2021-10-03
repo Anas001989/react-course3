@@ -9,11 +9,12 @@ function MeetupList(props){
             id={meetup.id}
             title={meetup.title}
             address={meetup.address}
-            discription={meetup.description}
+            /* discription={meetup.description} */
+            discription={meetup.discription}
             image={meetup.image}
             />
             )}
     </ul>;
-}
+} 
 
 export default MeetupList;
