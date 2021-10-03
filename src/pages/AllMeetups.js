@@ -1,6 +1,7 @@
-import MeetupList from '../components/meetups/MeetupList'
+import MeetupList from '../components/meetups/MeetupList';
+import { useState, useEffect } from 'react';
 
-const DummyData = [
+/* const DummyData = [
   {
     id: 'm1',
     title: 'This is a first meetup',
@@ -20,8 +21,47 @@ const DummyData = [
       'This is a first, amazing meetup which you definitely should not miss. It will be a lot of fun!',
   }
 ];
-
+ */
 function AllMeetupsPage() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadedMeetups, setLoadedMeetups] = useState([]);
+
+  useEffect(() => {
+
+    setIsLoading(true);
+
+    fetch('https://meetups-2326c-default-rtdb.firebaseio.com/meetups.json'
+
+    ).then((response) => {
+      return response.json();
+    }).then((data) => {
+      
+      const meetups = [];
+
+      for(const key in data){
+        const meetup = {
+          id: key,
+          ...data[key]
+        };
+        meetups.push(meetup);
+      }
+
+      setIsLoading(false);
+      setLoadedMeetups(meetups);
+    });
+
+  }, []);
+  
+
+
+  if(isLoading){
+    return(
+      <section>
+        <p>Loaing...</p>
+      </section>
+    );
+
+  }
   return <section>
     <h1>All Meetups</h1>
     {/* {[<li>Item1</li>,<li>Item2</li>]} */}
@@ -30,7 +70,8 @@ function AllMeetupsPage() {
         return <li key={meetup.id}>{meetup.title}</li>
       })}
     </ul> */}
-    <MeetupList meetups={DummyData} />
+    <MeetupList meetups={loadedMeetups} />
+    {/* <MeetupList meetups={DummyData} /> */}
   </section>;
 }
 
